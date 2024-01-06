@@ -1,8 +1,14 @@
 <Project>
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeCoverage" Version="17.8.0" />
+    <PackageVersion Include="Microsoft.MSBuildCache.Local" Version="0.1.236-preview-ge6851f76d4" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.1.1" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <GlobalPackageReference Include="Microsoft.MSBuildCache.SharedCompilation" Version="0.1.236-preview-ge6851f76d4" />
+    <GlobalPackageReference Include="Microsoft.MSBuildCache.AzureBlobStorage" Version="0.1.236-preview-ge6851f76d4" Condition=" '(ContinuousIntegrationBuild)' == 'True' " />
+    <GlobalPackageReference Include="Microsoft.MSBuildCache.Local" Version="0.1.236-preview-ge6851f76d4" Condition=" '(ContinuousIntegrationBuild)' == '' OR '(ContinuousIntegrationBuild)' == 'False' " />
   </ItemGroup>
 </Project>
