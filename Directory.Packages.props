@@ -1,7 +1,6 @@
 <Project>
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeCoverage" Version="17.8.0" />
-    <PackageVersion Include="Microsoft.MSBuildCache.Local" Version="0.1.236-preview-ge6851f76d4" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.1.1" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.1.1" />
@@ -14,7 +13,7 @@
     <GlobalPackageReference Include="Microsoft.MSBuildCache.AzureBlobStorage" Version="0.1.236-preview-ge6851f76d4" Condition=" '(ContinuousIntegrationBuild)' == 'True' " />
     <!-- Not quite working so lets assume everything is local for now until we get a proper example going. -->
     <!-- <GlobalPackageReference Include="Microsoft.MSBuildCache.Local" Version="0.1.236-preview-ge6851f76d4" Condition=" '(ContinuousIntegrationBuild)' == '' OR '(ContinuousIntegrationBuild)' == 'False' " /> -->
-    <GlobalPackageReference Include="Microsoft.MSBuildCache.Local">
+    <GlobalPackageReference Include="Microsoft.MSBuildCache.Local" Version="0.1.236-preview-ge6851f76d4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </GlobalPackageReference>
