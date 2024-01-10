@@ -10,21 +10,30 @@ Task("Clean")
         CleanDirectories("./**/TestResults", new CleanDirectorySettings() { Force = true });
     });
 
+Task("Restore")
+    .Does(() =>
+    {
+        MSBuild("./Root.sln", settings => settings
+            .WithTarget("restore")
+            .SetVerbosity(Verbosity.Minimal)
+            .SetConfiguration(configuration)
+            .SetContinuousIntegrationBuild(Convert.ToBoolean(remoteCache))
+            .WithToolPath("C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe")
+            .WithProperty("graphBuild", "true")
+            .WithProperty("reportFileAccesses", "true"));
+    });
+
 Task("Build")
     .Does(() =>
     {
-        DotNetMSBuildSettings dotNetMSBuildSettings = new DotNetMSBuildSettings
-        {
-            ContinuousIntegrationBuild = Convert.ToBoolean(remoteCache)
-        };
-
-        DotNetBuildSettings dotNetBuildSettings = new DotNetBuildSettings
-        {
-            Configuration = configuration,
-            MSBuildSettings = dotNetMSBuildSettings
-        };
-
-        DotNetBuild("./Root.sln", dotNetBuildSettings);
+        MSBuild("./Root.sln", settings => settings
+            .WithTarget("build")
+            .SetVerbosity(Verbosity.Minimal)
+            .SetConfiguration(configuration)
+            .SetContinuousIntegrationBuild(Convert.ToBoolean(remoteCache))
+            .WithToolPath("C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe")
+            .WithProperty("graphBuild", "true")
+            .WithProperty("reportFileAccesses", "true"));
     });
 
 Task("Test")
@@ -40,6 +49,7 @@ Task("Test")
 
 Task("ContinuousIntegration")
     .IsDependentOn("Clean")
+    .IsDependentOn("Restore")
     .IsDependentOn("Build")
     .IsDependentOn("Test");
 

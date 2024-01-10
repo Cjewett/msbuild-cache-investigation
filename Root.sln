@@ -11,7 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6FC6EB25-158
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BF806442-BC4D-49A9-ADF7-817F9BD04DDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cleaner", "test\Cleaner\Cleaner.csproj", "{B241F502-0097-48E9-B926-E037AE0FAA15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cleaner", "test\Cleaner\Cleaner.csproj", "{B241F502-0097-48E9-B926-E037AE0FAA15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79250014-856A-48D0-AA54-C2BE551A7086}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
