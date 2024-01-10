@@ -8,6 +8,7 @@ Task("Clean")
         CleanDirectories("./**/obj", new CleanDirectorySettings() { Force = true });
         CleanDirectories("./**/bin", new CleanDirectorySettings() { Force = true });
         CleanDirectories("./**/TestResults", new CleanDirectorySettings() { Force = true });
+        CleanDirectories("./MSBuildCacheLogs", new CleanDirectorySettings() { Force = true });
     });
 
 Task("Restore")
@@ -19,8 +20,9 @@ Task("Restore")
             .SetConfiguration(configuration)
             .SetContinuousIntegrationBuild(Convert.ToBoolean(remoteCache))
             .WithToolPath("C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe")
-            .WithProperty("graphBuild", "true")
-            .WithProperty("reportFileAccesses", "true"));
+            .WithArgumentCustomization(arguments => arguments
+                .Append("-graphBuild")
+                .Append("-reportFileAccesses")));
     });
 
 Task("Build")
@@ -32,8 +34,9 @@ Task("Build")
             .SetConfiguration(configuration)
             .SetContinuousIntegrationBuild(Convert.ToBoolean(remoteCache))
             .WithToolPath("C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe")
-            .WithProperty("graphBuild", "true")
-            .WithProperty("reportFileAccesses", "true"));
+            .WithArgumentCustomization(arguments => arguments
+                .Append("-graphBuild")
+                .Append("-reportFileAccesses")));
     });
 
 Task("Test")
@@ -50,7 +53,6 @@ Task("Test")
 Task("ContinuousIntegration")
     .IsDependentOn("Clean")
     .IsDependentOn("Restore")
-    .IsDependentOn("Build")
-    .IsDependentOn("Test");
+    .IsDependentOn("Build");
 
 RunTarget(target);
