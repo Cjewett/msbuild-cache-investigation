@@ -48,6 +48,18 @@ Task("Test")
         };
 
         DotNetTest("./Root.sln", settings);
+
+        /*
+        MSBuild("./Root.sln", settings => settings
+            .WithTarget("test")
+            .SetVerbosity(Verbosity.Minimal)
+            .SetConfiguration(configuration)
+            .SetContinuousIntegrationBuild(Convert.ToBoolean(remoteCache))
+            .WithToolPath("C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe")
+            .WithArgumentCustomization(arguments => arguments
+                .Append("-graphBuild")
+                .Append("-reportFileAccesses")));
+        */
     });
 
 Task("ContinuousIntegration")
