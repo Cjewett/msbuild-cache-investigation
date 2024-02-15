@@ -400,3 +400,6 @@ FodyWeavers.xsd
 # MSBuildCache
 MSBuildCacheLogs/
 MSBuildCache/
+
+# Nuke
+.nuke/
